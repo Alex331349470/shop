@@ -61,7 +61,7 @@ class AuthorizationsController extends Controller
 
         $user = User::where('phone', $request->phone)->first();
 
-        $token = JWTAuth::fromUser($user);
+        $token = auth('api')->login($user);
 
         return $this->respondWithToken($token)->setStatusCode(201);
     }
