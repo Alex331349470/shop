@@ -14,26 +14,31 @@ class UsersController extends Controller
     {
         $verifyData = \Cache::get($request->verification_key);
 
-        if (!$verifyData){
-            abort(403,'验证码失效');
+        if (!$verifyData) {
+            abort(403, '验证码失效');
         }
 
-        if (!hash_equals($verifyData['code'],$request->verification_code)){
+        if (!hash_equals($verifyData['code'], $request->verification_code)) {
             throw new AuthenticationException('验证码不正确');
         }
 
-        if (!hash_equals($verifyData['phone'],$request->phone)){
+        if (!hash_equals($verifyData['phone'], $request->phone)) {
             throw new AuthenticationException('手机号错误');
         }
 
         $user = User::create([
-            'name'=>$request->name,
-            'phone'=>$verifyData['phone'],
-            'password'=>bcrypt($request->password),
+            'name' => $request->name,
+            'phone' => $verifyData['phone'],
+            'password' => bcrypt($request->password),
         ]);
 
         \Cache::forget($request->verification_key);
 
         return new UserResource($user);
+    }
+
+    public function me(Request $request)
+    {
+        return new UserResource($request->user());
     }
 }

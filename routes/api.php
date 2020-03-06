@@ -46,7 +46,12 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
 
     Route::middleware('throttle:' . config('api.rate_limits.access'))
         ->group(function () {
-
+            // 登录后可以访问的接口
+            Route::middleware('auth:api')->group(function() {
+                // 当前登录用户信息
+                Route::get('user', 'UsersController@me')
+                    ->name('user.show');
+            });
         });
 });
 
