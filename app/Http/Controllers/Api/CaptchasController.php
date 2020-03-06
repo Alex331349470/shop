@@ -10,14 +10,16 @@ use App\Http\Requests\Api\CaptchaRequest;
 
 class CaptchasController extends Controller
 {
-    public function store(CaptchaRequest $request, CaptchaBuilder $captchaBuilder, PhraseBuilder $phraseBuilder)
+    public function store(CaptchaRequest $request)
     {
-        $key = 'captcha-'.Str::random(15);
+        $key = 'captcha-' . Str::random(15);
         $phone = $request->phone;
 
-        $code = $phraseBuilder->build(4);
+        $phraseBuilder = new PhraseBuilder(5, '0123456789');
 
-        $captcha = $captchaBuilder->build();
+        $captcha = new CaptchaBuilder(null, $phraseBuilder);
+
+        $captcha->build();
         $expiredAt = now()->addMinutes(5);
         \Cache::put($key, ['phone' => $phone, 'code' => $captcha->getPhrase()], $expiredAt);
 
