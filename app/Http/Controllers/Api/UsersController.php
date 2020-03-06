@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Api\UserPasswordRequest;
 use App\Http\Requests\Api\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -40,5 +41,26 @@ class UsersController extends Controller
     public function me(Request $request)
     {
         return new UserResource($request->user());
+    }
+
+    public function retryPassword(UserPasswordRequest $request)
+    {
+        $verifyData = \Cache::get($request->verification_key);
+
+        if (!$verifyData) {
+            abort(403, '验证码失效');
+        }
+
+        if (!hash_equals($verifyData['code'], $request->verification_code)) {
+            throw new AuthenticationException('验证码不正确');
+        }
+
+        $user = User::where('phone', $verifyData['phone'])->first();
+
+        $user->password = bcrypt($request->password);
+
+        $user->save();
+
+        return new UserResource($user);
     }
 }

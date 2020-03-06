@@ -36,9 +36,14 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
             Route::post('authorizations/sms', 'AuthorizationsController@smsStore')
                 ->name('api.authorizations.sms.store');
 
+            //短信密码重置
+            Route::post('user/password','UsersController@retryPassword')
+                ->name('user.password');
+
             // 刷新token
             Route::put('authorizations/current', 'AuthorizationsController@update')
                 ->name('authorizations.update');
+
             // 删除token
             Route::delete('authorizations/current', 'AuthorizationsController@destroy')
                 ->name('authorizations.destroy');
