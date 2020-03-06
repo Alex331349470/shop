@@ -7,6 +7,7 @@ use App\Http\Requests\Api\AuthVerificationCodeReuqest;
 use App\Models\User;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\JWTAuth;
 
 class AuthorizationsController extends Controller
 {
@@ -58,9 +59,9 @@ class AuthorizationsController extends Controller
         }
         $credentials['phone'] = $request->phone;
 
-        $user = User::where('phone', $request->phone)->get();
+        $user = User::where('phone', $request->phone)->first();
 
-        $token = \Auth::guard('api')->login($user);
+        $token = JWTAuth::fromUser($user);
 
         return $this->respondWithToken($token)->setStatusCode(201);
     }
