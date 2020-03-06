@@ -26,7 +26,7 @@ class AuthorizationsController extends Controller
 
         $username = $request->username;
 
-        if (is_numeric($username)){
+        if (is_numeric($username)) {
             $credentials['phone'] = $username;
         } else {
             $credentials['name'] = $username;
@@ -45,20 +45,20 @@ class AuthorizationsController extends Controller
     {
         $verifyData = \Cache::get($request->verification_key);
 
-        if (!$verifyData){
-            abort(403,'验证码失效');
+        if (!$verifyData) {
+            abort(403, '验证码失效');
         }
 
-        if (!hash_equals($verifyData['code'],$request->verification_code)){
+        if (!hash_equals($verifyData['code'], $request->verification_code)) {
             throw new AuthenticationException('验证码不正确');
         }
 
-        if (!hash_equals($verifyData['phone'],$request->phone)){
+        if (!hash_equals($verifyData['phone'], $request->phone)) {
             throw new AuthenticationException('手机号错误');
         }
         $credentials['phone'] = $request->phone;
 
-        $user = User::wherePhoneIs($request->phone)->get();
+        $user = User::where('phone', $request->phone)->get();
 
         $token = \Auth::guard('api')->login($user);
 
