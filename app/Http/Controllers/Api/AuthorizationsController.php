@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\AuthCaptchaReuqest;
 use App\Http\Requests\Api\AuthVerificationCodeReuqest;
+use App\Models\User;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 
@@ -57,9 +58,9 @@ class AuthorizationsController extends Controller
         }
         $credentials['phone'] = $request->phone;
 
-        if (!$token = \Auth::guard('api')->attempt($credentials)) {
-            throw new AuthenticationException('手机号错误');
-        }
+        $user = User::wherePhoneIs($request->phone)->get();
+
+        $token = \Auth::guard('api')->login($user);
 
         return $this->respondWithToken($token)->setStatusCode(201);
     }
