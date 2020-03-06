@@ -32,6 +32,11 @@ class AuthorizationsController extends Controller
         return $this->respondWithToken($token)->setStatusCode(201);
     }
 
+    public function smsStore()
+    {
+        
+    }
+
     public function update()
     {
         $token = auth('api')->refresh();
