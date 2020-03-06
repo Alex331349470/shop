@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Gregwar\Captcha\PhraseBuilder;
 use  Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Gregwar\Captcha\CaptchaBuilder;
@@ -9,10 +10,12 @@ use App\Http\Requests\Api\CaptchaRequest;
 
 class CaptchasController extends Controller
 {
-    public function store(CaptchaRequest $request, CaptchaBuilder $captchaBuilder)
+    public function store(CaptchaRequest $request, CaptchaBuilder $captchaBuilder, PhraseBuilder $phraseBuilder)
     {
         $key = 'captcha-'.Str::random(15);
         $phone = $request->phone;
+
+        $code = $phraseBuilder->build(4);
 
         $captcha = $captchaBuilder->build();
         $expiredAt = now()->addMinutes(5);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\AuthCaptchaReuqest;
+use App\Http\Requests\Api\AuthVerificationCodeReuqest;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 
@@ -39,7 +40,7 @@ class AuthorizationsController extends Controller
         return $this->respondWithToken($token)->setStatusCode(201);
     }
 
-    public function smsStore(AuthorizationRequest $request)
+    public function smsStore(AuthVerificationCodeReuqest $request)
     {
         $verifyData = \Cache::get($request->verification_key);
 
