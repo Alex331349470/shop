@@ -27,6 +27,21 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
             // 用户注册
             Route::post('users', 'UsersController@store')
                 ->name('users.store');
+
+            // 图片验证码登录
+            Route::post('authorizations', 'AuthorizationsController@store')
+                ->name('api.authorizations.store');
+
+            // 短信登录
+            Route::post('authorizations/sms', 'AuthorizationsController@smsStore')
+                ->name('api.authorizations.sms.store');
+
+            // 刷新token
+            Route::put('authorizations/current', 'AuthorizationsController@update')
+                ->name('authorizations.update');
+            // 删除token
+            Route::delete('authorizations/current', 'AuthorizationsController@destroy')
+                ->name('authorizations.destroy');
         });
 
     Route::middleware('throttle:' . config('api.rate_limits.access'))
