@@ -55,10 +55,9 @@ class AuthorizationsController extends Controller
             throw new AuthenticationException('手机号错误');
         }
         $credentials['phone'] = $request->phone;
-        $credentials['password'] = $request->password;
 
         if (!$token = \Auth::guard('api')->attempt($credentials)) {
-            throw new AuthenticationException('用户名或密码错误');
+            throw new AuthenticationException('手机号错误');
         }
 
         return $this->respondWithToken($token)->setStatusCode(201);
