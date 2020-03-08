@@ -37,4 +37,32 @@ class UserAddressesController extends Controller
         return new UserAddressResource($user->addresses);
     }
 
+    public function show(UserAddress $user_address)
+    {
+       return new UserAddressResource($user_address);
+    }
+
+    public function update(UserAddress $user_address,UserAddressRequest $request)
+    {
+        $user_address->update($request->only([
+            'province',
+            'city',
+            'district',
+            'address',
+            'zip',
+            'contact_name',
+            'contact_phone',
+        ]));
+
+        return new UserAddressResource($user_address);
+    }
+
+    public function destroy(UserAddress $user_address,Request $request)
+    {
+        $user_address->delete();
+        return response(null,204);
+    }
+    
+
+
 }
