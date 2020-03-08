@@ -74,6 +74,11 @@ class User extends Authenticatable implements MustVerifyEmailContract, JWTSubjec
         return $this->hasOne(UserInfo::class);
     }
 
+    public function addresses()
+    {
+        return $this->hasMany(UserAddress::class);
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
