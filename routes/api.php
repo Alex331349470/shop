@@ -60,9 +60,12 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
                 // 当前登录用户信息
                 Route::get('me', 'UsersController@me')
                     ->name('user.show');
-
+                //上传图片
                 Route::post('images', 'ImagesController@store')
                     ->name('images.store');
+                //更新用户信息
+                Route::patch('me','UsersController@update')
+                    ->name('user.update');
             });
         });
 });

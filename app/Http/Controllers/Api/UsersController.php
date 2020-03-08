@@ -6,10 +6,13 @@ use App\Http\Requests\Api\UserInfoRequest;
 use App\Http\Requests\Api\UserPasswordRequest;
 use App\Http\Requests\Api\UserRequest;
 use App\Http\Resources\UserResource;
+use App\Models\Image;
 use App\Models\User;
 use App\Models\UserInfo;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\DocBlock\Tags\Author;
 
 class UsersController extends Controller
 {
@@ -46,6 +49,7 @@ class UsersController extends Controller
     {
         $user = User::whereId($request->user()->id)->with('userInfo')->first();
         return new UserResource($user);
+
     }
 
     public function retryPassword(UserPasswordRequest $request)
@@ -69,11 +73,15 @@ class UsersController extends Controller
         return new UserResource($user);
     }
 
-    public function update(UserInfoRequest $request, User $user)
+    public function update(UserInfoRequest $request)
     {
+        $user = $request->user();
         $user->name = $request->name;
         $user->save();
-
+        if ($image = Image::whereUserId($user->id)->first()) {
+            $user->avatar = $image->path;
+            $user->save();
+        }
         if ($request->real_name) {
             $data['real_name'] = $request->real_name;
         }
@@ -81,7 +89,7 @@ class UsersController extends Controller
         $data['gender'] = $request->gender;
 
         $user->userInfo()->update($data);
-
+        $user = User::whereId($user->id)->with('userInfo')->first();
         return new UserResource($user);
     }
 }
