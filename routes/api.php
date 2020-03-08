@@ -66,6 +66,12 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
                 //更新用户信息
                 Route::patch('me','UsersController@update')
                     ->name('user.update');
+
+                Route::get('user_addresses','UserAddressesController@index')
+                    ->name('user.addresses.index');
+
+                Route::post('user_addresses','UserAddressesController@store')
+                    ->name('user.addresses.store');
             });
         });
 });
