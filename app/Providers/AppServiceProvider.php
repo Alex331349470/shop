@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\UserAddress;
+use App\Observers\UserAddressObserver;
 use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -26,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
 	{
 		\App\Models\User::observe(\App\Observers\UserObserver::class);
-
+        UserAddress::observe(UserAddressObserver::class);
         Resource::withoutWrapping();
         Schema::defaultStringLength(191);
     }
