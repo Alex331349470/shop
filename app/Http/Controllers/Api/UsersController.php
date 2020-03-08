@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-    public function store(UserRequest $request, User $user)
+    public function store(UserRequest $request, User $user, UserInfo $userInfo)
     {
         $verifyData = \Cache::get($request->verification_key);
 
@@ -35,6 +35,10 @@ class UsersController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
+        $userInfo = UserInfo::create([
+            'user_id' => $user->id,
+        ]);
+        
         \Cache::forget($request->verification_key);
 
         return new UserResource($user);
