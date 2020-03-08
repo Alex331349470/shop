@@ -35,10 +35,8 @@ class UsersController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        $userInfo = UserInfo::create([
-            'user_id' => $user->id,
-        ]);
-        
+        $userInfo->user_id = $user->id;
+        $userInfo->save();
         \Cache::forget($request->verification_key);
 
         return new UserResource($user);
@@ -72,6 +70,6 @@ class UsersController extends Controller
 
     public function update(UserInfoRequest $request, User $user, UserInfo $userInfo)
     {
-
+        
     }
 }
