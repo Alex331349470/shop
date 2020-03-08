@@ -52,10 +52,17 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
     Route::middleware('throttle:' . config('api.rate_limits.access'))
         ->group(function () {
             // 登录后可以访问的接口
+            // 分类列表
+            Route::get('categories', 'CategoriesController@index')
+                ->name('categories.index');
+
             Route::middleware('auth:api')->group(function() {
                 // 当前登录用户信息
                 Route::get('me', 'UsersController@me')
                     ->name('user.show');
+
+                Route::post('images', 'ImagesController@store')
+                    ->name('images.store');
             });
         });
 });

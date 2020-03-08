@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Api\UserInfoRequest;
 use App\Http\Requests\Api\UserPasswordRequest;
 use App\Http\Requests\Api\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Models\UserInfo;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 
@@ -62,5 +64,10 @@ class UsersController extends Controller
         $user->save();
 
         return new UserResource($user);
+    }
+
+    public function update(UserInfoRequest $request, User $user, UserInfo $userInfo)
+    {
+
     }
 }
