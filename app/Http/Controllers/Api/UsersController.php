@@ -44,7 +44,8 @@ class UsersController extends Controller
 
     public function me(Request $request)
     {
-        return new UserResource($request->user());
+        $user = User::whereId($request->user()->id)->with('userInfo')->first();
+        return new UserResource($user);
     }
 
     public function retryPassword(UserPasswordRequest $request)
@@ -68,8 +69,19 @@ class UsersController extends Controller
         return new UserResource($user);
     }
 
-    public function update(UserInfoRequest $request, User $user, UserInfo $userInfo)
+    public function update(UserInfoRequest $request, User $user)
     {
-        
+        $user->name = $request->name;
+        $user->save();
+
+        if ($request->real_name) {
+            $data['real_name'] = $request->real_name;
+        }
+
+        $data['gender'] = $request->gender;
+
+        $user->userInfo()->update($data);
+
+        return new UserResource($user);
     }
 }
