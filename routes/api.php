@@ -81,6 +81,9 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
 
                 Route::delete('user_addresses/{user_address}','UserAddressesController@destroy')
                     ->name('user.address.destroy');
+
+                Route::post('user_addresses/{user_address}/default','UserAddressesController@setDefault')
+                    ->name('user.address.default');
             });
         });
 });

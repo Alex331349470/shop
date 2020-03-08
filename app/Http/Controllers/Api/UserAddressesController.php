@@ -39,10 +39,10 @@ class UserAddressesController extends Controller
 
     public function show(UserAddress $user_address)
     {
-       return new UserAddressResource($user_address);
+        return new UserAddressResource($user_address);
     }
 
-    public function update(UserAddress $user_address,UserAddressRequest $request)
+    public function update(UserAddress $user_address, UserAddressRequest $request)
     {
         $user_address->update($request->only([
             'province',
@@ -57,12 +57,27 @@ class UserAddressesController extends Controller
         return new UserAddressResource($user_address);
     }
 
-    public function destroy(UserAddress $user_address,Request $request)
+    public function destroy(UserAddress $user_address, Request $request)
     {
         $user_address->delete();
-        return response(null,204);
+        return response(null, 204);
     }
-    
+
+
+    public function setDefault(UserAddress $user_address, Request $request)
+    {
+        $user_id = $request->user()->id;
+
+        UserAddress::whereUserId($user_id)->get()->each(function ($user_address) {
+            $user_address->default_address = 0;
+            $user_address->save();
+        });
+
+        $user_address->default_address = 1;
+        $user_address->save();
+
+        return new UserAddressResource($user_address);
+    }
 
 
 }
