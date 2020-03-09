@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\AddCartRequest;
+use App\Http\Requests\Api\CartItemRequest;
 use App\Http\Resources\CartItemResource;
 use App\Models\CartItem;
 use Illuminate\Http\Request;
@@ -34,9 +35,17 @@ class CartController extends Controller
         return response(null,201);
     }
 
-    public function destroy(Request $request)
+    public function update(CartItem $cartItem, CartItemRequest $request)
     {
+        $cartItem->amount = $request->amount;
+        $cartItem->save();
 
+        return new CartItemResource($cartItem);
+    }
+
+    public function destroy(CartItem $cartItem)
+    {
+        $cartItem->delete();
         return response(null,204);
     }
 }
