@@ -16,7 +16,7 @@ class CreateGoodsTable extends Migration
         Schema::create('goods', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->json('description')->nullable();
+            $table->string('description')->nullable();
             $table->string('art');
             $table->string('time');
             $table->string('size');
@@ -24,10 +24,11 @@ class CreateGoodsTable extends Migration
             $table->boolean('on_sale')->default(true);
             $table->string('type');
             $table->string('style');
-            $table->float('discount');
+            $table->float('discount')->default(1);
             $table->text('content');
-            $table->decimal('price',10,2);
+            $table->decimal('price',10,2)->default(0.00);
             $table->float('rating')->default(5);
+            $table->integer('category_id')->index();
             $table->unsignedInteger('stock')->default(0);
             $table->unsignedInteger('sold_count')->default(0);
             $table->unsignedInteger('review_count')->default(0);

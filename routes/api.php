@@ -56,6 +56,12 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
             Route::get('categories', 'CategoriesController@index')
                 ->name('categories.index');
 
+            Route::get('categories/{category}/goods','CategoriesController@goodIndex')
+                ->name('goods.index');
+
+            Route::get('goods/{good}', 'GoodsController@show')
+                ->name('good.show');
+
             Route::middleware('auth:api')->group(function() {
                 // 当前登录用户信息
                 Route::get('me', 'UsersController@me')
@@ -84,6 +90,8 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
 
                 Route::post('user_addresses/{user_address}/default','UserAddressesController@setDefault')
                     ->name('user.address.default');
+
+
             });
         });
 });
