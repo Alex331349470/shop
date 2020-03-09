@@ -11,8 +11,8 @@ class AdsTableSeeder extends Seeder
      */
     public function run()
     {
-        $ads = factory(\App\Models\Ad::class)->times(3)->make()->toArray();
+        $ads = factory(\App\Models\Ad::class)->times(3)->make();
 
-        \App\Models\Ad::insert($ads);
+        \App\Models\Ad::insert($ads->toArray());
     }
 }

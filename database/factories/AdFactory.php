@@ -2,14 +2,15 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\Models\Ad;
 use Faker\Generator as Faker;
 
-$factory->define(\App\Models\Ad::class, function (Faker $faker) {
-    $date_time = $faker->date.' '.$faker->time;
+$factory->define(Ad::class, function (Faker $faker) {
+    $date_time = $faker->date . ' ' . $faker->time;
+
     return [
-        'image' => $faker->imageUrl(1200,958),
-        'url' => 'http://www.baidu.com',
+        'image' => $faker->imageUrl(1200, 958),
+        'url' => $faker->url,
         'created_at' => $date_time,
         'updated_at' => $date_time,
     ];
