@@ -24,6 +24,7 @@ class CreateGoodsTable extends Migration
             $table->boolean('on_sale')->default(true);
             $table->string('type');
             $table->string('style');
+            $table->string('theme');
             $table->float('discount')->default(1);
             $table->text('content');
             $table->decimal('price',10,2)->default(0.00);

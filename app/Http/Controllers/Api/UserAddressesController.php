@@ -79,5 +79,11 @@ class UserAddressesController extends Controller
         return new UserAddressResource($user_address);
     }
 
+    public function defaultAddress(Request $request)
+    {
+        $address = $request->user()->addresses()->where('default_address', 1)->first();
+        return new UserAddressResource($address);
+    }
+
 
 }

@@ -91,6 +91,9 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
                 Route::delete('user_addresses/{user_address}','UserAddressesController@destroy')
                     ->name('user.address.destroy');
 
+                Route::get('user_address/default','UserAddressesController@defaultAddress')
+                    ->name('user.default.address');
+
                 Route::post('user_addresses/{user_address}/default','UserAddressesController@setDefault')
                     ->name('user.address.default');
 
@@ -99,6 +102,7 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
 
                 Route::get('cart','CartController@index')
                     ->name('cart.index');
+
             });
         });
 });
