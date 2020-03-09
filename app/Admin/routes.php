@@ -13,4 +13,7 @@ Route::group([
     $router->get('/', 'HomeController@index')->name('admin.home');
     $router->get('users','UsersController@index');
     $router->get('goods','GoodsController@index');
+    $router->get('goods/create','GoodsController@create');
+    $router->get('goods','GoodsController@store');
+
 });

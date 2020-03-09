@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Category;
 use App\Models\Good;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -16,6 +17,8 @@ class GoodsController extends AdminController
      * @var string
      */
     protected $title = '商品';
+
+
 
     /**
      * Make a grid builder.
@@ -89,7 +92,6 @@ class GoodsController extends AdminController
         $show->field('review_count', __('Review count'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
-
         return $show;
     }
 
@@ -101,24 +103,28 @@ class GoodsController extends AdminController
     protected function form()
     {
         $form = new Form(new Good);
-
-        $form->text('title', __('Title'));
-        $form->text('description', __('Description'));
-        $form->text('art', __('Art'));
-        $form->text('time', __('Time'));
-        $form->text('size', __('Size'));
-        $form->text('quality', __('Quality'));
-        $form->switch('on_sale', __('On sale'))->default(1);
-        $form->text('type', __('Type'));
-        $form->text('style', __('Style'));
-        $form->decimal('discount', __('Discount'));
-        $form->textarea('content', __('Content'));
-        $form->decimal('price', __('Price'));
-        $form->decimal('rating', __('Rating'))->default(5.00);
-        $form->number('stock', __('Stock'));
-        $form->number('sold_count', __('Sold count'));
-        $form->number('review_count', __('Review count'));
-
+        $categories_ids = Category::all() ->pluck('id')->toArray();
+        $form->text('title', '商品名称')->rules('required');
+        $form->text('description', '商品描述');
+        $form->text('art', '艺术家');
+        $form->text('time', '创作时间');
+        $form->text('size', '尺寸');
+        $form->text('quality', '材质');
+        $form->radio('on_sale','上架')->options(['1' => '是','0'=>'否'])->default(1);
+        $form->text('type', '题材类型');
+        $form->text('style', '风格');
+        $form->decimal('discount', '折扣');
+        $form->textarea('content', '商品介绍');
+        $form->decimal('price', '市场价格');
+        $form->decimal('rating', '评分')->default(5.00);
+        $form->number('stock', '库存');
+        $form->number('sold_count', '销量');
+        $form->number('review_count', '评论数');
+        $form->select('category','分类')->options($categories_ids);
+        $form->hasMany('images','图片列表',function (Form\NestedForm $form){
+            $form->text('description','图片描述');
+            $form->image('image','产品图片');
+        });
         return $form;
     }
 }
