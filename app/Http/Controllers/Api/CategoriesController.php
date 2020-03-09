@@ -17,7 +17,7 @@ class CategoriesController extends Controller
 
     public function goodIndex(Category $category)
     {
-        $goods = $category->goods()->paginate(9);
+        $goods = $category->goods()->with('images')->paginate(9);
         GoodResource::wrap('data');
         return new GoodResource($goods);
     }

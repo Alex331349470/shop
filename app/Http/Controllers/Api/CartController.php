@@ -33,4 +33,10 @@ class CartController extends Controller
 
         return response(null,201);
     }
+
+    public function destroy(Request $request)
+    {
+
+        return response(null,204);
+    }
 }
