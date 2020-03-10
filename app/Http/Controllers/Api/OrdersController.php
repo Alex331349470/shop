@@ -89,4 +89,13 @@ class OrdersController extends Controller
 
         return new OrderResource($order);
     }
+
+    public function wechatMessage(Order $order)
+    {
+        if ($order->paid_at) {
+            return response('订单已支付',1);
+        }
+
+        return response('订单未支付',0);
+    }
 }
