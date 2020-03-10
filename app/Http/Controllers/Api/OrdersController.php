@@ -56,7 +56,7 @@ class OrdersController extends Controller
                 // 创建一个 OrderItem 并直接与当前订单关联
                 $item = $order->items()->make([
                     'amount' => $amount = $user->cartItems()->where('good_id',$good_id)->first()->amount,
-                    'price' => $$good->price,
+                    'price' => $good->price,
                 ]);
                 $item->good()->associate($good);
                 $item->save();
