@@ -117,6 +117,9 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
 
                 Route::get('orders','OrdersController@index')
                     ->name('orders.index');
+
+                Route::get('orders/{order}','OrdersController@show')
+                    ->name('orders.show');
             });
         });
 });

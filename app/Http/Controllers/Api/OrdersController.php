@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\OrderRequest;
 use App\Http\Resources\OrderResource;
-use App\Models\CartItem;
 use App\Models\Good;
 use App\Models\UserAddress;
 use App\Models\Order;
@@ -20,6 +19,12 @@ class OrdersController extends Controller
         OrderResource::wrap('data');
 
         return new OrderResource($orders);
+    }
+
+    public function show(Order $order)
+    {
+        $order = $order->with('items')->first();
+        return new OrderResource($order);
     }
 
     public function store(OrderRequest $request)
@@ -77,7 +82,7 @@ class OrdersController extends Controller
             $order->update(['total_amount' => $totalAmount]);
 
             // 将下单的商品从购物车中移除
-//            $user->cartItems()->whereIn('good_id', $good_ids)->delete();
+            $user->cartItems()->whereIn('good_id', $good_ids)->delete();
 
             return $order;
         });
