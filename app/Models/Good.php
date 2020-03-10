@@ -27,7 +27,7 @@ class Good extends Model
     public function decreaseStock($amount)
     {
         if ($amount < 0) {
-            throw new AuthenticationException('减库存不可小于0');
+            abort(403,'减库存不可小于0');
         }
 
         return $this->where('id', $this->id)->where('stock', '>=', $amount)->decrement('stock', $amount);
@@ -36,7 +36,7 @@ class Good extends Model
     public function addStock($amount)
     {
         if ($amount < 0) {
-            throw new AuthenticationException('加库存不可小于0');
+            abort(403,'加库存不可小于0');
         }
         $this->increment('stock', $amount);
     }
