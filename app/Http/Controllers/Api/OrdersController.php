@@ -93,9 +93,13 @@ class OrdersController extends Controller
     public function wechatMessage(Order $order)
     {
         if ($order->paid_at) {
-            return response('订单已支付',1);
+            return response()->json([
+                '1' => '订单已支付'
+            ])->setStatusCode(200);
         }
 
-        return response('订单未支付',0);
+        return response()->json([
+            '0' => '订单未支付'
+        ])->setStatusCode(200);
     }
 }
