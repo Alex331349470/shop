@@ -104,7 +104,7 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
                     ->name('cart.index');
 
                 Route::get('cart/index','CartController@cartIndex')
-                    ->name('cart.index');
+                    ->name('cart.cart.index');
 
                 Route::patch('cart/{good}','CartController@update')
                     ->name('cart.update');
