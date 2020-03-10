@@ -132,7 +132,7 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
             });
         });
 
-    Route::middleware('auth.api')->group(function (){
+    Route::middleware('auth:api')->group(function (){
         Route::get('orders/{order}/wechat','OrdersController@wechatMessage')
             ->name('order.wechat.message');
     });
