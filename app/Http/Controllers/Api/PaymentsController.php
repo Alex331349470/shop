@@ -23,7 +23,7 @@ class PaymentsController extends Controller
 
         $qrCode = new QrCode($wechatOrder->code_url);
 
-        return response($qrCode->writeDataUri(), 200, ['Content-Type' => $qrCode->getContentType()]);
+        return response($qrCode->writeDataUri(), 200);
     }
 
     public function wechatNotify()
