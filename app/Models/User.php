@@ -82,6 +82,11 @@ class User extends Authenticatable implements MustVerifyEmailContract, JWTSubjec
         return $this->hasMany(CartItem::class);
     }
 
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();

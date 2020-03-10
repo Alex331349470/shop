@@ -24,6 +24,11 @@ class Good extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+
     public function decreaseStock($amount)
     {
         if ($amount < 0) {
