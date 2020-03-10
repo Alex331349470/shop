@@ -10,6 +10,7 @@ use App\Models\UserAddress;
 use App\Models\Order;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrdersController extends Controller
 {
@@ -42,7 +43,7 @@ class OrdersController extends Controller
             // 遍历用户提交的 good
             foreach ($good_ids as $good_id) {
                 if (!$good = Good::find($good_id)) {
-                    abort(403,$good->title.'不存在该商品');
+                    abort(403,'不存在ID为'.$good_id.'的商品');
                 }
 
                 if (!$good->on_sale) {
