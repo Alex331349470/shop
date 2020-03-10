@@ -24,9 +24,9 @@ class PaymentsController extends Controller
             'body' => '支付订单:' . $order->no,
         ]);
 
-        $qrcode = new QrCode($wechatOrder->code_url);
+        $qrCode = new QrCode($wechatOrder->code_url);
 
-        return response($qrcode->writeString(), 200, ['Content-Type' => $qrCode->getContentType()]);
+        return response($qrCode->writeString(), 200, ['Content-Type' => $qrCode->getContentType()]);
     }
 
     public function wechatNotify()
