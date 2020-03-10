@@ -6,13 +6,22 @@ use App\Http\Requests\Api\AddCartRequest;
 use App\Http\Requests\Api\CartItemRequest;
 use App\Http\Resources\CartItemResource;
 use App\Models\CartItem;
+use App\Models\Good;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
     public function index(Request $request)
     {
-        $cartItems = $request->user()->cartItems()->with('user','good')->paginate(5);
+        $cartItems = $request->user()->cartItems()->with('user','good')->get();
+        dd($cartItems);
+
+        return new CartItemResource($cartItems);
+    }
+
+    public function cartIndex(Request $request)
+    {
+        $cartItems = $request->user()->cartItems()->get();
         return new CartItemResource($cartItems);
     }
     public function add(AddCartRequest $request)
@@ -35,17 +44,10 @@ class CartController extends Controller
         return response(null,201);
     }
 
-    public function update(CartItem $cartItem, CartItemRequest $request)
+    public function destroy(Good $good, Request $request)
     {
-        $cartItem->amount = $request->amount;
-        $cartItem->save();
+        $request->user()->cartItems()->where('good_id',$good->id)->delete();
 
-        return new CartItemResource($cartItem);
-    }
-
-    public function destroy(CartItem $cartItem)
-    {
-        $cartItem->delete();
         return response(null,204);
     }
 }

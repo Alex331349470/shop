@@ -103,11 +103,17 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
                 Route::get('cart','CartController@index')
                     ->name('cart.index');
 
-                Route::patch('carts/{cart}','CartController@update')
+                Route::get('cart/index','CartController@cartIndex')
+                    ->name('cart.index');
+
+                Route::patch('cart/{good}','CartController@update')
                     ->name('cart.update');
 
-                Route::delete('carts/{cart}','Cartcontroller@delete')
-                    ->name('cart.delete');
+                Route::delete('cart/{good}','CartController@destroy')
+                    ->name('cart.destroy');
+
+                Route::post('orders','OrdersController@store')
+                    ->name('orders.store');
             });
         });
 });
