@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton('wechat_pay', function () {
             $config = config('pay.wechat');
-            $config['notify_url'] = 'http://shop.zidata.cn/v2.0.0/payment/wechat/notify';
+            $config['notify_url'] = 'http://requestbin.net/r/xx8yngxx';
             if (app()->environment() !== 'production') {
                 $config['log']['level'] = Logger::DEBUG;
             } else {

@@ -17,8 +17,8 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
         return '商城 api v2.0.0';
     })->name('version');
 
-    Route::post('payment/wechat/notify', 'PaymentsController@wechatNotify')
-        ->name('payment.wechat.notify');
+//    Route::post('payment/wechat/notify', 'PaymentsController@wechatNotify')
+//        ->name('payment.wechat.notify');
 
     Route::middleware('throttle:' . config('api.rate_limits.sign'))
         ->group(function () {
