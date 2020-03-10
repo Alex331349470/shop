@@ -123,6 +123,7 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
 
                 Route::get('orders/{order}','OrdersController@show')
                     ->name('orders.show');
+
                 Route::post('payment/{order}/wechat','PaymentsController@payByWechat')
                     ->name('payment.wechat');
             });
