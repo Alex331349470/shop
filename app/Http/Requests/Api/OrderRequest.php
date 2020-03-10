@@ -23,7 +23,7 @@ class OrderRequest extends FormRequest
                 'required',
 //                Rule::exists('user_addresses', 'id')->where('user_id', $this->user()->id),
             ],
-            'items'  => ['required','json'],
+            'items'  => ['required', 'array'],
             'items.*.good_id' => [ // 检查 items 数组下每一个子数组的 good_id 参数
                 'required',
                 function ($attribute, $value, $fail) {

@@ -20,8 +20,8 @@ class CartController extends Controller
 
     public function cartIndex(Request $request)
     {
-        $cartItems = $request->user()->cartItems()->get();
-        return new CartItemResource($cartItems);
+        $cartItems = $request->user()->cartItems;
+        return CartItemResource::collection($cartItems);
     }
     public function add(AddCartRequest $request)
     {
