@@ -72,6 +72,9 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
             Route::get('goods/{good}/replies','GoodsController@replyIndex')
                 ->name('good.replies');
 
+            Route::post('goods/search','GoodsController@index')
+                ->name('goods.search,index');
+
             Route::middleware('auth:api')->group(function() {
                 // 当前登录用户信息
                 Route::get('me', 'UsersController@me')

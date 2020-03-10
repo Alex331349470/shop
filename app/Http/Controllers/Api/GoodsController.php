@@ -19,4 +19,24 @@ class GoodsController extends Controller
         ReplyResource::wrap('data');
         return new ReplyResource($good->replies);
     }
+
+    public function index(Request $request)
+    {
+        $builder = Good::query()->where('on_sale', true);
+        // 判断是否有提交 search 参数，如果有就赋值给 $search 变量
+        // search 参数用来模糊搜索商品
+        if ($search = $request->input('search', '')) {
+            $like = '%'.$search.'%';
+            // 模糊搜索商品标题、商品详情
+            $builder->where(function ($query) use ($like) {
+                $query->where('title', 'like', $like)
+                    ->orWhere('description', 'like', $like)
+                    ->orWhere('art','like',$like);
+            });
+
+            $goods = $builder->paginate(9);
+
+            return new GoodResource($goods);
+        }
+    }
 }
