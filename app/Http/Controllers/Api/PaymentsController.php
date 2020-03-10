@@ -11,9 +11,6 @@ class PaymentsController extends Controller
 {
     public function payByWechat(Order $order, Request $request)
     {
-        if (!($request->type == 'wechat')) {
-            abort(403, '支付类型错误');
-        }
         if ($order->paid_at || $order->closed) {
             abort(403, '订单状态不正确');
         }
