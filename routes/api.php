@@ -65,6 +65,9 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
             Route::get('ads','AdsController@index')
                 ->name('ads.index');
 
+            Route::post('payment/wechat/notify', 'PaymentsController@wechatNotify')
+                ->name('payment.wechat.notify');
+
             Route::middleware('auth:api')->group(function() {
                 // 当前登录用户信息
                 Route::get('me', 'UsersController@me')
@@ -120,6 +123,8 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
 
                 Route::get('orders/{order}','OrdersController@show')
                     ->name('orders.show');
+                Route::post('payment/{order}/wechat','PaymentsController@payByWechat')
+                    ->name('payment.wechat');
             });
         });
 });
