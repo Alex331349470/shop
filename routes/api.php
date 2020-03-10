@@ -114,6 +114,9 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
 
                 Route::post('orders','OrdersController@store')
                     ->name('orders.store');
+
+                Route::get('orders','OrdersController@index')
+                    ->name('orders.index');
             });
         });
 });
