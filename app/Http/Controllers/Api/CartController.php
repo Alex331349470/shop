@@ -14,7 +14,6 @@ class CartController extends Controller
     public function index(Request $request)
     {
         $cartItems = $request->user()->cartItems()->with('user','good')->get();
-        dd($cartItems);
 
         return new CartItemResource($cartItems);
     }
