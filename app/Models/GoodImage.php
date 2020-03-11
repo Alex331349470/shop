@@ -21,4 +21,5 @@ class GoodImage extends Model
         }
         return \Storage::disk('public')->url($this->attributes['image']);
     }
+
 }

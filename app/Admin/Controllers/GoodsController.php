@@ -42,7 +42,6 @@ class GoodsController extends AdminController
         $grid->type('类型');
         $grid->style('风格');
         $grid->discount('折扣');
-        $grid->content('商品介绍');
         $grid->price('价格');
         $grid->rating('评分');
         $grid->stock('库存');

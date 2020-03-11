@@ -14,8 +14,6 @@ class Ad extends Model
         if (Str::startsWith($this->attributes['image'], ['http://', 'https://'])) {
             return $this->attributes['image'];
         }
-//        return \Storage::disk('public')->url($this->attributes['image']);
-        return env('APP_URL').'/storage/'.$this->attributes['image'];
+        return \Storage::disk('public')->url($this->attributes['image']);
     }
 }
-http://shop.zidata.cn/storage/images/lADPGoGu7EqX243NAfTNBLA_1200_500.jpg
