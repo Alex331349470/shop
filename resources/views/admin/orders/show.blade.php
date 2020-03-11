@@ -34,7 +34,7 @@
             </tr>
             @foreach($order->items as $item)
                 <tr>
-                    <td>{{ $item->product->title }} {{ $item->productSku->title }}</td>
+                    <td>{{ $item->good->title }} {{ $item->good->title }}</td>
                     <td>￥{{ $item->price }}</td>
                     <td>{{ $item->amount }}</td>
                 </tr>
