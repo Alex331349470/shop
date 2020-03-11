@@ -18,5 +18,19 @@ Route::group([
     $router->get('goods/{id}/edit', 'GoodsController@edit');
     $router->put('goods/{id}', 'GoodsController@update');
 
+    $router->get('ads','AdsController@index');
+    $router->get('ads/create','AdsController@create');
+    $router->post('ads','AdsController@store');
+    $router->get('ads/{id}/edit', 'AdsController@edit');
+    $router->put('ads/{id}', 'AdsController@update');
+
+    $router->get('categories','CategoriesController@index');
+    $router->get('categories/create','CategoriesController@create');
+    $router->post('categories','CategoriesController@store');
+    $router->get('categories/{id}/edit', 'CategoriesController@edit');
+    $router->put('categories/{id}', 'CategoriesController@update');
+
     $router->get('orders', 'OrdersController@index')->name('admin.orders.index');
+    $router->get('orders/{order}', 'OrdersController@show')->name('admin.orders.show');
+    $router->post('orders/{order}/ship', 'OrdersController@ship')->name('admin.orders.ship');
 });

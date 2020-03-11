@@ -131,6 +131,9 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
                 Route::get('orders/{order}','OrdersController@show')
                     ->name('orders.show');
 
+                Route::post('orders/{order}/status','OrdersController@received')
+                    ->name('order.status.received');
+
                 Route::get('orders/replies','OrdersController@replyIndex')
                     ->name('orders.replies.index');
 
