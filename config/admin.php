@@ -5,17 +5,17 @@ return [
     /*
      * 站点标题
      */
-    'name' => 'Shop',
+    'name' => 'Gomine Shop',
 
     /*
      * 页面顶部 Logo
      */
-    'logo' => '<b>Shop</b>',
+    'logo' => '<b>Gomine</b>Shop',
 
     /*
      * 页面顶部小 Logo
      */
-    'logo-mini' => '<b>SH</b>',
+    'logo-mini' => '<b>GS</b>',
 
     /*
      * Laravel-Admin 启动文件路径
@@ -42,7 +42,7 @@ return [
     /*
      * Laravel-Admin 页面标题
      */
-    'title' => 'Shop管理后台',
+    'title' => 'Gomine-Shop管理后台',
 
     /*
      * 是否使用 https
@@ -192,12 +192,12 @@ return [
     /*
      * 显示版本
      */
-    'show_version' => true,
+    'show_version' => false,
 
     /*
      * 显示环境
      */
-    'show_environment' => true,
+    'show_environment' => false,
 
     /*
      * 菜单绑定权限
