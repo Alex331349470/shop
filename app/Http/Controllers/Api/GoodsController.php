@@ -34,7 +34,7 @@ class GoodsController extends Controller
                     ->orWhere('art','like',$like);
             });
 
-            $goods = $builder->paginate(9);
+            $goods = $builder->with('images')->paginate(9);
 
             return new GoodResource($goods);
         }

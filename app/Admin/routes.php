@@ -17,4 +17,6 @@ Route::group([
     $router->post('goods','GoodsController@store');
     $router->get('goods/{id}/edit', 'GoodsController@edit');
     $router->put('goods/{id}', 'GoodsController@update');
+
+    $router->get('orders', 'OrdersController@index')->name('admin.orders.index');
 });
