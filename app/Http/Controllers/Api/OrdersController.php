@@ -22,6 +22,14 @@ class OrdersController extends Controller
         return new OrderResource($orders);
     }
 
+    public function replyIndex(Request $request)
+    {
+        $orders = Order::where('user_id',$request->user()->id)->with('items.good.images,replies')->orderBy('created_at','desc')->get();
+
+        OrderResource::wrap('data');
+        return new OrderResource($orders);
+    }
+
     public function show(Order $order)
     {
         $order = $order->with('items')->first();

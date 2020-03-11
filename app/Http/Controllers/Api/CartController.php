@@ -13,7 +13,7 @@ class CartController extends Controller
 {
     public function index(Request $request)
     {
-        $cartItems = $request->user()->cartItems()->with('user','good')->get();
+        $cartItems = $request->user()->cartItems()->with('user','good.images')->get();
         CartItemResource::wrap('data');
         return new CartItemResource($cartItems);
     }
