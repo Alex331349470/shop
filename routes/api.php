@@ -131,6 +131,11 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
                 Route::get('orders/{order}','OrdersController@show')
                     ->name('orders.show');
 
+                Route::patch('orders/{order}/reply','OrdersController@replied')
+                    ->name('order.reply');
+
+                Route::patch('orders/{order}/cancel','OrdersController@cancelled')
+                    ->name('order.cancel');
 
                 Route::patch('orders/{order}','OrdersController@received')
                     ->name('order.status.received');

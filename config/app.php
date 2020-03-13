@@ -119,6 +119,8 @@ return [
     |
     */
 
+    'order_ttl' => 1800,
+
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',

@@ -86,6 +86,9 @@ class OrdersController extends Controller
 
                 $item->save();
                 $totalAmount += $good->price * $amount;
+                if ($good->decreaseStock($amount) <= 0) {
+                    abort(403,'该商品库存不足');
+                }
             }
 
             // 更新订单总金额
@@ -93,7 +96,7 @@ class OrdersController extends Controller
 
             // 将下单的商品从购物车中移除
             $user->cartItems()->whereIn('good_id', $good_ids)->delete();
-
+            $this->dispatch(new CloseOrder($order, config('app.order_ttl')));
             return $order;
         });
 
@@ -105,6 +108,24 @@ class OrdersController extends Controller
         $order = Order::query()->where('no',$request->no)->first();
 
         $order->received_status = true;
+        $order->save();
+
+        return new OrderResource($order);
+    }
+
+    public function replied(Request $request)
+    {
+        $order = Order::query()->where('no', $request->no)->first();
+        $order->reply_status = true;
+        $order->save();
+
+        return new OrderResource($order);
+    }
+
+    public function cancelled(Request $request)
+    {
+        $order = Order::query()->where('no', $request->no)->first();
+        $order->cancel = true;
         $order->save();
 
         return new OrderResource($order);

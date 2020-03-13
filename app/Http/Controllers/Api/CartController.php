@@ -29,7 +29,7 @@ class CartController extends Controller
         $goodId = $request->good_id;
         $amount = $request->amount;
 
-        if ($cart = $user->cartItems()->where('good_id',$goodId)->first()) {
+        if (($cart = $user->cartItems()->where('good_id',$goodId)->first()) && ($request->cartExist == false)) {
             $cart->update([
                 'amount' => $amount,
             ]);
