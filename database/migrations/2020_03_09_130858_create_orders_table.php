@@ -29,6 +29,7 @@ class CreateOrdersTable extends Migration
             $table->boolean('reviewed')->default(false);
             $table->string('ship_status')->default(\App\Models\Order::SHIP_STATUS_PENDING);
             $table->text('ship_data')->nullable();
+            $table->boolean('received_status')->default(0);
             $table->text('extra')->nullable();
             $table->timestamps();
         });

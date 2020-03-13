@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Api\OrderReceiveReuqest;
 use App\Http\Requests\Api\OrderRequest;
 use App\Http\Resources\OrderResource;
 use App\Models\Good;
@@ -95,6 +96,16 @@ class OrdersController extends Controller
 
             return $order;
         });
+
+        return new OrderResource($order);
+    }
+
+    public function received(OrderReceiveReuqest $request)
+    {
+        $order = Order::query()->where('no',$request->no)->first();
+
+        $order->received_status = true;
+        $order->save();
 
         return new OrderResource($order);
     }
