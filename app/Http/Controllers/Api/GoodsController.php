@@ -11,7 +11,8 @@ class GoodsController extends Controller
 {
     public function show(Good $good)
     {
-        return new GoodResource($good->with('images')->first());
+
+        return new GoodResource($good);
     }
 
     public function replyIndex(Good $good)
