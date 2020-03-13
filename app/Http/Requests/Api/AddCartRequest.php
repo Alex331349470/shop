@@ -35,6 +35,7 @@ class AddCartRequest extends FormRequest
                 },
             ],
             'amount' => ['required', 'integer', 'min:1'],
+            'cartExist' => 'required',
         ];
     }
     public function attributes()
