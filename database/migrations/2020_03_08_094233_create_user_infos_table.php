@@ -17,7 +17,7 @@ class CreateUserInfosTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id')->index();
             $table->string('real_name')->nullable();
-            $table->smallInteger('gender')->default(0)->comment('性别:0-保密,1-男,2-女');
+            $table->smallInteger('gender')->default(1)->comment('性别:1-男,2-女');
             $table->timestamps();
         });
     }

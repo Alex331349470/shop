@@ -14,4 +14,14 @@ class Category extends Model
     {
         return $this->hasMany(Good::class);
     }
+
+    public static function getSelectOptions()
+    {
+        $options = \DB::table('categories')->select('id','name as text')->get();
+        $selectOption = [];
+        foreach ($options as $option){
+            $selectOption[$option->id] = $option->text;
+        }
+        return $selectOption;
+    }
 }

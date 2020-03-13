@@ -8,6 +8,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Monolog\Handler\IFTTTHandler;
 
 class GoodsController extends AdminController
 {
@@ -17,7 +18,6 @@ class GoodsController extends AdminController
      * @var string
      */
     protected $title = '商品';
-
 
 
     /**
@@ -36,7 +36,7 @@ class GoodsController extends AdminController
         $grid->time('创作时间');
         $grid->size('尺寸');
         $grid->quality('材质');
-        $grid->on_sale('已上架')->display(function ($value){
+        $grid->on_sale('已上架')->display(function ($value) {
             return $value ? '是' : '否';
         });
         $grid->type('类型');
@@ -102,17 +102,17 @@ class GoodsController extends AdminController
     protected function form()
     {
         $form = new Form(new Good);
-        $categories_ids = Category::all() ->pluck('id')->toArray();
+
         $form->text('title', '商品名称')->rules('required');
         $form->text('description', '商品描述')->rules('required');
         $form->text('art', '艺术家')->rules('required|string');
         $form->text('time', '创作时间(xxxx-xx-xx)')->rules('required|date');
         $form->text('size', '尺寸')->rules('required');
         $form->text('quality', '材质')->rules('required');
-        $form->radio('on_sale','上架')->options(['1' => '是','0'=>'否'])->default(1);
+        $form->radio('on_sale', '上架')->options(['1' => '是', '0' => '否'])->default(1);
         $form->text('type', '类型')->rules('required');
         $form->text('style', '风格')->rules('required');
-        $form->text('theme','题材')->rules('required');
+        $form->text('theme', '题材')->rules('required');
         $form->decimal('discount', '折扣')->default(1);
         $form->quill('content', '商品介绍');
         $form->decimal('price', '市场价格')->default(0);
@@ -120,12 +120,14 @@ class GoodsController extends AdminController
         $form->number('stock', '库存')->default(0);
         $form->number('sold_count', '销量')->default(0);
         $form->number('review_count', '评论数')->default(0);
-        $form->select('category_id','分类')->options($categories_ids);
+        $form->select('category_id', '分类')->options(Category::getSelectOptions());
 
-        $form->hasMany('images','图片列表',function (Form\NestedForm $form){
-            $form->text('description','图片描述')->rules('required');
-            $form->image('image','产品图片')->rules('required|image');
+        $form->hasMany('images', '图片列表', function (Form\NestedForm $form) {
+            $form->text('description', '图片描述');
+            $form->image('image', '产品图片')->rules('image');
         });
         return $form;
     }
+
+
 }
