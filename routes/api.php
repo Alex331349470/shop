@@ -59,13 +59,13 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
             // 分类列表
             Route::get('categories', 'CategoriesController@index')
                 ->name('categories.index');
-
+            //获取分类下所有商品
             Route::get('categories/{category}/goods','CategoriesController@goodIndex')
                 ->name('goods.index');
-
+            //获取单个id商品详情
             Route::get('goods/{good}', 'GoodsController@show')
                 ->name('good.show');
-
+            //
             Route::get('ads','AdsController@index')
                 ->name('ads.index');
 

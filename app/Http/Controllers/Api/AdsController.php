@@ -10,6 +10,7 @@ class AdsController extends Controller
 {
     public function index()
     {
+        //获取广告collection
         $ads = Ad::all()->toArray();
 
         return new AdResource($ads);

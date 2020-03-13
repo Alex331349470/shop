@@ -13,6 +13,7 @@ class AuthorizationsController extends Controller
 {
     public function store(AuthCaptchaReuqest $request)
     {
+        //缓存图片验证码
         $captchaData = \Cache::get($request->captcha_key);
 
         if (!$captchaData) {
