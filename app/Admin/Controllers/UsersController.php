@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Models\User;
+use App\Models\UserInfo;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -29,8 +30,13 @@ class UsersController extends AdminController
         $grid->id('id');
         $grid->name('姓名');
         $grid->phone('手机号');
+        $grid->column('性别')->display(function (){
+            $userInfo = UserInfo::query()->where('user_id',$this->id)->first();
+            if ($userInfo) {
+                return $userInfo->gender ? '男' : '女';
+            }
+        });
         $grid->created_at('注册时间');
-
         $grid->disableCreateButton();
         $grid->disableActions();
 

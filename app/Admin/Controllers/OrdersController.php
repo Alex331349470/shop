@@ -31,6 +31,7 @@ class OrdersController extends AdminController
         $grid->ship_status('物流')->display(function($value) {
             return Order::$shipStatusMap[$value];
         });
+
         $grid->refund_status('退款状态')->display(function($value) {
             return Order::$refundStatusMap[$value];
         });

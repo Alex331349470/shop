@@ -132,7 +132,7 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
                     ->name('orders.show');
 
 
-                Route::patch('orders/{order}/status','OrdersController@received')
+                Route::patch('orders/{order}','OrdersController@received')
                     ->name('order.status.received');
 
                 Route::get('orders/replies','OrdersController@replyIndex')
