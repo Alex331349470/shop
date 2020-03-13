@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\OrderReceiveReuqest;
 use App\Http\Requests\Api\OrderRequest;
 use App\Http\Resources\OrderResource;
+use App\Jobs\CloseOrder;
 use App\Models\Good;
 use App\Models\UserAddress;
 use App\Models\Order;
@@ -96,7 +97,7 @@ class OrdersController extends Controller
 
             // 将下单的商品从购物车中移除
             $user->cartItems()->whereIn('good_id', $good_ids)->delete();
-            $this->dispatch(new CloseOrder($order, config('app.order_ttl')));
+//            $this->dispatch(new CloseOrder($order, config('app.order_ttl')));
             return $order;
         });
 
