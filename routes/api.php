@@ -17,9 +17,6 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
         return '商城 api v2.0.0';
     })->name('version');
 
-//    Route::post('payment/wechat/notify', 'PaymentsController@wechatNotify')
-//        ->name('payment.wechat.notify');
-
     Route::middleware('throttle:' . config('api.rate_limits.sign'))
         ->group(function () {
             // 图片验证码
@@ -146,7 +143,7 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
                 Route::get('payment/{order}/wechat','PaymentsController@payByWechat')
                     ->name('payment.wechat');
 
-                Route::get('payment/{order}/alipay','PaymentsController@payNyAlipay')
+                Route::get('payment/{order}/alipay','PaymentsController@payByAlipay')
                     ->name('payment.alipay');
 
                 Route::post('replies','RepliesController@store')
