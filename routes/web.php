@@ -5,3 +5,6 @@ Route::post('payment/wechat/notify', 'ReturnsController@wechatNotify')
 
 Route::post('payment/alipay/notify', 'ReturnsController@alipayNotify')
     ->name('payment.alipay.notify');
+
+Route::get('payment/alipay/return', 'ReturnsController@alipayReturn')
+    ->name('payment.alipay.return');

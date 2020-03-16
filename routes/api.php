@@ -143,6 +143,7 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
                 Route::get('payment/{order}/wechat','PaymentsController@payByWechat')
                     ->name('payment.wechat');
 
+
                 Route::get('payment/{order}/alipay','PaymentsController@payByAlipay')
                     ->name('payment.alipay');
 
