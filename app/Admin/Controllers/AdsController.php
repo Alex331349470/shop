@@ -29,10 +29,10 @@ class AdsController extends AdminController
         $grid->id('ID');
         $grid->image('轮播图');
         $grid->url('链接地址');
-//        $grid->actions(function ($actions) {
-//            $actions->disableView();
+        $grid->actions(function ($actions) {
+            $actions->disableView();
 //            $actions->disableDelete();
-//        });
+        });
         $grid->tools(function ($tools) {
             // 禁用批量删除按钮
             $tools->batch(function ($batch) {
