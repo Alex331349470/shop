@@ -15,7 +15,9 @@ class CreateReplyImagesTable extends Migration
     {
         Schema::create('reply_images', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('reply_id')->index();
+            $table->integer('good_id')->index();
+            $table->integer('user_id')->index();
+            $table->integer('order_id')->index();
             $table->string('path')->nullable();
             $table->timestamps();
         });

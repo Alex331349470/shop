@@ -2,19 +2,10 @@
 
 namespace App\Http\Requests\Api;
 
-use Illuminate\Foundation\Http\FormRequest;
 
 class ReplyImageRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -24,7 +15,9 @@ class ReplyImageRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'image' => 'required|image',
+            'order_id' => 'required|numeric',
+            'good_id' => 'required|numeric'
         ];
     }
 }

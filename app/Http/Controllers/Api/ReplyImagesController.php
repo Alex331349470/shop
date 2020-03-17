@@ -6,6 +6,7 @@ use App\Handlers\ImageUploadHandler;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\ReplyImageRequest;
 use App\Http\Resources\ImageResource;
+use App\Http\Resources\ReplyImageResource;
 use App\Models\ReplyImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -16,13 +17,14 @@ class ReplyImagesController extends Controller
     {
         $user = $request->user();
 
-        $size = $request->type == 'avatar' ? 416 : 1024;
-        $result = $handler->save($request->image, Str::plural($request->type), $user->id, $size);
+        $result = $handler->save($request->image, 'reply', $user->id, 416);
 
         $replyImage->path = $result['path'];
         $replyImage->user_id = $user->id;
+        $replyImage->good_id = $request->good_id;
+        $replyImage->order_id = $request->order_id;
         $replyImage->save();
 
-        return new ImageResource($replyImage);
+        return new ReplyImageResource($replyImage);
     }
 }
