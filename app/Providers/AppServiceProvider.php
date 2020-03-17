@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
             $config['return_url'] = 'http://shopfornt.zidata.cn/orderdetails';
             // 判断当前项目运行环境是否为线上环境
             if (app()->environment() !== 'production') {
-                $config['mode']         = 'dev';
+//                $config['mode']         = 'dev';
                 $config['log']['level'] = Logger::DEBUG;
             } else {
                 $config['log']['level'] = Logger::WARNING;
