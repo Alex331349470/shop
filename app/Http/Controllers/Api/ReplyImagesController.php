@@ -13,6 +13,12 @@ use Illuminate\Support\Str;
 
 class ReplyImagesController extends Controller
 {
+    public function show(ReplyImage $replyImage, Request $request)
+    {
+        $images = $replyImage->whereUserId($request->user()->id)->whereOrderId($request->order_id)->whereGoodId($request->good_id)->get();
+        ReplyImageResource::wrap('data');
+        return new ReplyImageResource($images);
+    }
     public function store(ReplyImageRequest $request, ImageUploadHandler $handler, ReplyImage $replyImage)
     {
         $user = $request->user();
@@ -25,6 +31,6 @@ class ReplyImagesController extends Controller
         $replyImage->order_id = $request->order_id;
         $replyImage->save();
 
-        return new ReplyImageResource($replyImage);
+        return response(null,201);
     }
 }

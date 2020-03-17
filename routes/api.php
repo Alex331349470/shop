@@ -153,7 +153,11 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
                 Route::get('replies','RepliesController@index')
                     ->name('replies.index');
 
+                Route::post('replies/images', 'ReplyImagesController@store')
+                    ->name('replies.images');
 
+                Route::get('reply_images/{reply_image}','ReplyImagesController@show')
+                    ->name('reply_images.show');
             });
         });
 
