@@ -16,6 +16,7 @@ class ReplyRequest extends FormRequest
     {
         return [
             'good_id' => 'required|numeric',
+            'order_id' => 'required|numeric',
             'replyContent' => 'required|string',
         ];
     }

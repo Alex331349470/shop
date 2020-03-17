@@ -14,6 +14,7 @@ class RepliesController extends Controller
         $reply = Reply::create([
             'good_id' => $request->good_id,
             'user_id' => $request->user()->id,
+            'order_id' => $request->order_id,
             'content' => $request->replyContent,
         ]);
 
