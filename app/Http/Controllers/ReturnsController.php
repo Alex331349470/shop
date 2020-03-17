@@ -35,13 +35,6 @@ class ReturnsController extends Controller
         return app('wechat_pay')->success();
     }
 
-    public function alipayReturn()
-    {
-        $data = app('alipay')->verify();
-
-        return $data;
-    }
-
     public function alipayNotify()
     {
         // 校验输入参数
