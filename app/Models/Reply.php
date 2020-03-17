@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
 {
-    protected $fillable = ['good_id', 'user_id', 'content'];
+    protected $fillable = ['good_id', 'user_id','order_id', 'content'];
 
     public function user()
     {
@@ -25,6 +25,6 @@ class Reply extends Model
 
     public function images()
     {
-        return $this->hasMany(ReplyImage::class);   
+        return $this->hasMany(ReplyImage::class);
     }
 }
