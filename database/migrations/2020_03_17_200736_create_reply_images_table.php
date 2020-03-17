@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCartExistToCartItemsTable extends Migration
+class CreateReplyImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddCartExistToCartItemsTable extends Migration
      */
     public function up()
     {
-        Schema::table('cart_items', function (Blueprint $table) {
-            $table->boolean('cartExist')->nullable();
+        Schema::create('reply_images', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('reply_id')->index();
+            $table->string('path')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddCartExistToCartItemsTable extends Migration
      */
     public function down()
     {
-        Schema::table('cart_items', function (Blueprint $table) {
-            $table->dropColumn('carExist');
-        });
+        Schema::dropIfExists('reply_images');
     }
 }

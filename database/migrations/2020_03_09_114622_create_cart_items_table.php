@@ -17,6 +17,7 @@ class CreateCartItemsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('good_id');
+            $table->boolean('cartExist')->nullable();
             $table->unsignedBigInteger('amount');
         });
     }

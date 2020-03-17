@@ -86,6 +86,11 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+
     public static function findAvailableNo()
     {
         // 订单流水号前缀
