@@ -39,7 +39,7 @@ class ReturnsController extends Controller
     {
         $data = app('alipay')->verify();
 
-        return $data;
+        dd($data);
     }
 
     public function alipayNotify()
