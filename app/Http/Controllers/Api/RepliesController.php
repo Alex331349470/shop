@@ -26,8 +26,6 @@ class RepliesController extends Controller
             'content' => $request->replyContent,
         ]);
 
-        dd($reply->images);
-
         return new ReplyResource($reply);
     }
 
