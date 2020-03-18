@@ -14,6 +14,10 @@ class ReplyResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        $data =  parent::toArray($request);
+        $data['order_no'] = Order::whereId($request->order_id)->first()->no;
+
+        return $data;
+
     }
 }
