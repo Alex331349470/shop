@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\GoodResource;
+use App\Http\Resources\ReplyImageResource;
 use App\Http\Resources\ReplyResource;
 use App\Models\Good;
 use Illuminate\Http\Request;
@@ -18,6 +19,12 @@ class GoodsController extends Controller
     {
         ReplyResource::wrap('data');
         return new ReplyResource($good->replies);
+    }
+
+    public function replyImageIndex(Good $good)
+    {
+        ReplyImageResource::wrap('data');
+        return new ReplyImageResource($good->replyImages);
     }
 
     public function index(Request $request)

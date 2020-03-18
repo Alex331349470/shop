@@ -6,10 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReplyImage extends Model
 {
-    protected $fillable = ['reply_id','path'];
+    protected $fillable = ['good_id','user_id','order_id','path'];
 
-    public function reply()
-    {
-        return $this->belongsTo(Reply::class);
-    }
+
 }
