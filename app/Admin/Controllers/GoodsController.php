@@ -49,7 +49,6 @@ class GoodsController extends AdminController
         $grid->review_count('评论数');
         $grid->actions(function ($actions) {
             $actions->disableView();
-            $actions->disableDelete();
         });
         $grid->tools(function ($tools) {
             // 禁用批量删除按钮
