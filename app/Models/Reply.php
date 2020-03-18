@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
 {
-    protected $fillable = ['good_id', 'user_id','order_id', 'content'];
+    protected $fillable = ['good_id', 'user_id','order_id', 'content','images'];
+
 
     public function user()
     {
