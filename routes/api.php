@@ -140,6 +140,9 @@ Route::prefix('v2.0.0')->namespace('Api')->name('api.v2.0.0')->group(function ()
                 Route::patch('orders/{order}','OrdersController@received')
                     ->name('order.status.received');
 
+                Route::post('orders/search','OrdersController@search')
+                    ->name('orders.search');
+
                 Route::get('orders/replies','OrdersController@replyIndex')
                     ->name('orders.replies.index');
 

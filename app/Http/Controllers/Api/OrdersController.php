@@ -104,6 +104,24 @@ class OrdersController extends Controller
         return new OrderResource($order);
     }
 
+    public function search(Request $request)
+    {
+        $builder = Order::query();
+        // 判断是否有提交 search 参数，如果有就赋值给 $search 变量
+        // search 参数用来模糊搜索商品
+        if ($search = $request->input('search', '')) {
+            $like = '%' . $search . '%';
+            // 模糊搜索商品标题、商品详情
+            $builder->where(function ($query) use ($like) {
+                $query->where('no', 'like', $like);
+            });
+
+            $orders = $builder->with('items')->paginate(9);
+
+            return new OrderResource($orders);
+        }
+    }
+
     public function received(OrderReceiveReuqest $request)
     {
         $order = Order::query()->where('no',$request->no)->first();
