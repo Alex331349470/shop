@@ -119,7 +119,7 @@ return [
     |
     */
 
-    'order_ttl' => 1800,
+    'order_ttl' => 30,
 
     'key' => env('APP_KEY'),
 
