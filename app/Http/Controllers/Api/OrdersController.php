@@ -116,7 +116,7 @@ class OrdersController extends Controller
                 $query->where('no', 'like', $like);
             });
 
-            $orders = $builder->with('items')->paginate(9);
+            $orders = $builder->with('user','items.good.images')->paginate(9);
 
             return new OrderResource($orders);
         }
