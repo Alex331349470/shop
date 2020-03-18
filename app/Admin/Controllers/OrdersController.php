@@ -74,11 +74,9 @@ class OrdersController extends AdminController
         $data = $this->validate($request, [
             'express_company' => ['required'],
             'express_no'      => ['required'],
-            'express_price'   => ['required'],
         ], [], [
             'express_company' => '物流公司',
             'express_no'      => '物流单号',
-            'express_price'   => '物流运费',
         ]);
         // 将订单发货状态改为已发货，并存入物流信息
         $order->update([

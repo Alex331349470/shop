@@ -83,8 +83,6 @@
                     <td>{{ $order->ship_data['express_company'] }}</td>
                     <td>物流单号：</td>
                     <td>{{ $order->ship_data['express_no'] }}</td>
-                    <td>物流运费：</td>
-                    <td>{{ $order->ship_data['express_price'] }}</td>
                 </tr>
             @endif
             <!-- 订单发货结束 -->

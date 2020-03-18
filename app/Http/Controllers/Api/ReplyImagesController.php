@@ -31,6 +31,6 @@ class ReplyImagesController extends Controller
         $replyImage->order_id = $request->order_id;
         $replyImage->save();
 
-        return response(null,201);
+        return response($replyImage->id,201);
     }
 }

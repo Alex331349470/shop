@@ -27,6 +27,7 @@ class CreateGoodsTable extends Migration
             $table->string('theme');
             $table->float('discount')->default(1);
             $table->text('content');
+            $table->decimal('express_price')->default(0);
             $table->decimal('price',10,2)->default(0.00);
             $table->float('rating')->default(5);
             $table->integer('category_id')->index();
