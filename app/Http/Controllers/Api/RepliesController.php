@@ -31,7 +31,7 @@ class RepliesController extends Controller
 
     public function index(Request $request)
     {
-        $replies = $request->user()->replies;
+        $replies = Reply::whereUserId($request->user()->id)->with('order')->get();
 
         return new ReplyResource($replies);
     }
