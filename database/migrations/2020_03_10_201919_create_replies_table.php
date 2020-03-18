@@ -18,6 +18,7 @@ class CreateRepliesTable extends Migration
             $table->integer('good_id')->index();
             $table->integer('user_id')->index();
             $table->integer('order_id')->index();
+            $table->json('images')->nullable();
             $table->text('content')->nullable();
             $table->timestamps();
         });
