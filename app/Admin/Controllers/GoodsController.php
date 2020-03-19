@@ -41,6 +41,8 @@ class GoodsController extends AdminController
         });
         $grid->type('类型');
         $grid->style('风格');
+        $grid->good_no('商品编号');
+        $grid->brand('商品品牌');
         $grid->discount('折扣');
         $grid->price('价格');
         $grid->rating('评分');
@@ -56,7 +58,6 @@ class GoodsController extends AdminController
                 $batch->disableDelete();
             });
         });
-
 
         return $grid;
     }
@@ -81,6 +82,8 @@ class GoodsController extends AdminController
         $show->field('on_sale', __('On sale'));
         $show->field('type', __('Type'));
         $show->field('style', __('Style'));
+        $show->field('good_no',__('Good no'));
+        $show->field('brand',__('Brand'));
         $show->field('discount', __('Discount'));
         $show->field('content', __('Content'));
         $show->field('price', __('Price'));
@@ -111,6 +114,8 @@ class GoodsController extends AdminController
         $form->radio('on_sale', '上架')->options(['1' => '是', '0' => '否'])->default(1);
         $form->text('type', '类型')->rules('required');
         $form->text('style', '风格')->rules('required');
+        $form->text('good_no','商品编号')->rules('string');
+        $form->text('brand','商品品牌')->rules('string');
         $form->text('theme', '题材')->rules('required');
         $form->decimal('discount', '折扣')->default(1);
         $form->quill('content', '商品介绍');
