@@ -16,7 +16,6 @@ class UserInfoRequest extends FormRequest
     {
         return [
             'name' => 'between:3,25|regex:/^[A-Za-z0-9\-\_]+$/' ,
-            'real_name' => 'string|min:3',
             'gender' => 'required|numeric'
         ];
     }
