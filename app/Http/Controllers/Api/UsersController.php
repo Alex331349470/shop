@@ -82,9 +82,7 @@ class UsersController extends Controller
             $user->avatar = $image->path;
             $user->save();
         }
-        if ($request->real_name) {
-            $data['real_name'] = $request->real_name;
-        }
+        $data['real_name'] = $request->real_name;
 
         $data['gender'] = $request->gender;
 
