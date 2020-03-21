@@ -41,6 +41,8 @@ class GoodsController extends AdminController
         });
         $grid->type('类型');
         $grid->style('风格');
+        $grid->weight('净重');
+        $grid->unit('单位');
         $grid->good_no('商品编号');
         $grid->brand('商品品牌');
         $grid->discount('折扣');
@@ -82,6 +84,8 @@ class GoodsController extends AdminController
         $show->field('on_sale', __('On sale'));
         $show->field('type', __('Type'));
         $show->field('style', __('Style'));
+        $show->field('weight',__('weight'));
+        $show->field('unit',__('Good unit'));
         $show->field('good_no',__('Good no'));
         $show->field('brand',__('Brand'));
         $show->field('discount', __('Discount'));
@@ -106,17 +110,19 @@ class GoodsController extends AdminController
         $form = new Form(new Good);
 
         $form->text('title', '商品名称')->rules('required');
-        $form->text('description', '商品描述')->rules('required');
-        $form->text('art', '艺术家')->rules('required|string');
-        $form->text('time', '创作时间(xxxx-xx-xx)')->rules('required|date');
+        $form->text('description', '商品描述');
+        $form->text('art', '艺术家');
+        $form->text('time', '创作时间(xxxx-xx-xx)');
         $form->text('size', '尺寸')->rules('required');
         $form->text('quality', '材质')->rules('required');
         $form->radio('on_sale', '上架')->options(['1' => '是', '0' => '否'])->default(1);
         $form->text('type', '类型')->rules('required');
-        $form->text('style', '风格')->rules('required');
-        $form->text('good_no','商品编号')->rules('string');
-        $form->text('brand','商品品牌')->rules('string');
-        $form->text('theme', '题材')->rules('required');
+        $form->text('style', '风格');
+        $form->decimal('weight','净重')->default(0);
+        $form->text('unit','单位')->default('g');
+        $form->text('good_no','商品编号');
+        $form->text('brand','商品品牌');
+        $form->text('theme', '题材');
         $form->decimal('discount', '折扣')->default(1);
         $form->quill('content', '商品介绍');
         $form->decimal('price', '市场价格')->default(0);
