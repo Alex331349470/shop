@@ -27,7 +27,7 @@ class AuthorizationsController extends Controller
         }
 
         $username = $request->username;
-
+        //判断username是否是手机或者昵称
         if (is_numeric($username)) {
             $credentials['phone'] = $username;
         } else {
@@ -35,16 +35,17 @@ class AuthorizationsController extends Controller
         }
 
         $credentials['password'] = $request->password;
-
+        //利用jwt轮子进行用户token认证
         if (!$token = \Auth::guard('api')->attempt($credentials)) {
             throw new AuthenticationException('用户名或密码错误');
         }
-
+        //返回用户token
         return $this->respondWithToken($token)->setStatusCode(201);
     }
 
     public function smsStore(AuthVerificationCodeReuqest $request)
     {
+        //获取缓存中验证码信息
         $verifyData = \Cache::get($request->verification_key);
 
         if (!$verifyData) {
@@ -61,9 +62,9 @@ class AuthorizationsController extends Controller
         $credentials['phone'] = $request->phone;
 
         $user = User::where('phone', $request->phone)->first();
-
+        //用户登录
         $token = auth('api')->login($user);
-
+        //返回用户token
         return $this->respondWithToken($token)->setStatusCode(201);
     }
 

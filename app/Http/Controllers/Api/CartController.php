@@ -14,6 +14,7 @@ class CartController extends Controller
     public function index(Request $request)
     {
         $cartItems = $request->user()->cartItems()->with('user','good.images')->get();
+        //统一resource机制
         CartItemResource::wrap('data');
         return new CartItemResource($cartItems);
     }
