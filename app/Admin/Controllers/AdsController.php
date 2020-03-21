@@ -28,7 +28,8 @@ class AdsController extends AdminController
 
         $grid->id('ID');
         $grid->image('轮播图');
-        $grid->url('链接地址');
+//        $grid->url('链接地址');
+        $grid->url_info('链接地址');
         $grid->actions(function ($actions) {
             $actions->disableView();
 //            $actions->disableDelete();
@@ -55,7 +56,7 @@ class AdsController extends AdminController
 
         $show->field('id', __('Id'));
         $show->field('image', __('Image'));
-        $show->field('url', __('Url'));
+        $show->field('url_info', __('Url info'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -72,7 +73,7 @@ class AdsController extends AdminController
         $form = new Form(new Ad);
 
         $form->image('image', '轮播图片')->rules('required|image');
-        $form->url('url', '链接地址');
+        $form->text('url_info', '链接地址');
 
         return $form;
     }

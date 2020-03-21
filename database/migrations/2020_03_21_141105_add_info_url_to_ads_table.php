@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdsTable extends Migration
+class AddInfoUrlToAdsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateAdsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ads', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('image');
-            $table->text('url')->nullable();
-            $table->timestamps();
+        Schema::table('ads', function (Blueprint $table) {
+            $table->longText('url_info')->nullable();
         });
     }
 
@@ -28,6 +25,8 @@ class CreateAdsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ads');
+        Schema::table('ads', function (Blueprint $table) {
+            $table->dropColumn('url_info');
+        });
     }
 }
