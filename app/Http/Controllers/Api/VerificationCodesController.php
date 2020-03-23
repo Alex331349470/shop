@@ -21,7 +21,7 @@ class VerificationCodesController extends Controller
         if (!hash_equals($captchaData['code'], $request->captcha_code)) {
             // 验证错误就清除缓存
             \Cache::forget($request->captcha_key);
-            throw new AuthenticationException('验证码错误');
+            throw new AuthenticationException('图片验证码错误');
         }
 
         $phone = $captchaData['phone'];
@@ -38,7 +38,7 @@ class VerificationCodesController extends Controller
             ]);
         } catch (\Overtrue\EasySms\Exceptions\NoGatewayAvailableException $exception) {
             $message = $exception->getException('aliyun')->getMessage();
-            abort(500, $message ?: '短信发送异常');
+            abort(422, $message ?: '短信发送异常');
         }
 
         $key = 'verificationCode_'.Str::random(15);
